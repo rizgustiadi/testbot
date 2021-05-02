@@ -2,38 +2,62 @@ try:
     from userbot.modules.sql_helper import SESSION, BASE
 except ImportError:
     raise AttributeError
-from sqlalchemy import Column, String
+
+from sqlalchemy import Column, Numeric, UnicodeText
 
 
-class PMPermit(BASE):
-    __tablename__ = "pmpermit"
-    chat_id = Column(String(14), primary_key=True)
+class Snips(BASE):
+    __tablename__ = "snips"
+    snip = Column(UnicodeText, primary_key=True)
+    reply = Column(UnicodeText)
+    f_mesg_id = Column(Numeric)
 
-    def __init__(self, chat_id):
-        self.chat_id = str(chat_id)  # ensure string
+    def __init__(self, snip, reply, f_mesg_id):
+        self.snip = snip
+        self.reply = reply
+        self.f_mesg_id = f_mesg_id
 
 
-PMPermit.__table__.create(checkfirst=True)
+Snips.__table__.create(checkfirst=True)
 
 
-def is_approved(chat_id):
+def get_snip(keyword):
     try:
-        return SESSION.query(PMPermit).filter(
-            PMPermit.chat_id == str(chat_id)).one()
-    except BaseException:
-        return None
+        return SESSION.query(Snips).get(keyword)
     finally:
         SESSION.close()
 
 
-def approve(chat_id):
-    adder = PMPermit(str(chat_id))
-    SESSION.add(adder)
-    SESSION.commit()
+def get_snips():
+    try:
+        return SESSION.query(Snips).all()
+    finally:
+        SESSION.close()
 
 
-def dissprove(chat_id):
-    rem = SESSION.query(PMPermit).get(str(chat_id))
-    if rem:
+def add_snip(keyword, reply, f_mesg_id):
+    to_check = get_snip(keyword)
+    if not to_check:
+        adder = Snips(keyword, reply, f_mesg_id)
+        SESSION.add(adder)
+        SESSION.commit()
+        return True
+    else:
+        rem = SESSION.query(Snips).filter(Snips.snip == keyword)
         SESSION.delete(rem)
         SESSION.commit()
+        adder = Snips(keyword, reply, f_mesg_id)
+        SESSION.add(adder)
+        SESSION.commit()
+        return False
+
+
+def remove_snip(keyword):
+    to_check = get_snip(keyword)
+    if not to_check:
+        return False
+    else:
+        rem = SESSION.query(Snips).filter(Snips.snip == keyword)
+        rem.delete()
+        SESSION.commit()
+        return True
