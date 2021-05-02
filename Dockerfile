@@ -1,4 +1,4 @@
-FROM heinzdf/testbot:latest
+FROM zalxnew/akenoxnew:latest
 
 # Clone repo and prepare working directory
 RUN git clone -b master https://github.com/bambank9/testbot /testbot
