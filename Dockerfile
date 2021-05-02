@@ -1,4 +1,4 @@
-FROM heinzdf/oubnew:latest
+FROM alpine:edge
 
 # Clone repo and prepare working directory
 RUN git clone -b master https://github.com/bambank9/testbot /testbot
