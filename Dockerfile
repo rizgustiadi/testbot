@@ -68,9 +68,11 @@ RUN python3 -m ensurepip \
     rm -r /root/.cache
 
 # Clone repo and prepare working directory
-RUN git clone -b master https://github.com/bambank9/testbot /testbot
-RUN chmod 777 /testbot
-WORKDIR /testbot
+RUN git clone https://github.com/bambank9/testbot /root/userbot
+RUN mkdir /root/userbot/.bin
+WORKDIR /root/userbot/
+ENV PATH="/root/userbot/.bin:$PATH"
+WORKDIR /root/userbot/
 # au ah
 COPY ./sample_config.env ./userbot.session* ./config.env* /root/userbot/
 
