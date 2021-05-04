@@ -15,7 +15,6 @@ from userbot import (
     COUNT_MSG,
     CMD_HELP,
     ISAFK,
-    BOTLOG,
     BOTLOG_CHATID,
     USERS,
     LOGO,
