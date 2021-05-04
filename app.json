@@ -66,6 +66,10 @@
       "description": "ChatID of the Log group. Create a Group > add a bot e.g. @dAnjani_bot > make the group public > type /id. (*usualy starts with '-100.....')",
       "value": "0"
     },
+    "BOTLOG": {
+      "description": "Incase you want to turn off logging, put this to false",
+      "value": "False"
+    },
     "CONSOLE_LOGGER_VERBOSE": {
       "description": "If you need verbosity on the console logging",
       "value": "False"
