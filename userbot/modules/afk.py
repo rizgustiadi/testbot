@@ -17,7 +17,6 @@ from userbot import (
     ISAFK,
     BOTLOG_CHATID,
     USERS,
-    LOGO,
     PM_AUTO_BAN,
     bot,
 )
