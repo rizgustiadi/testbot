@@ -21,7 +21,6 @@ RUN apk add --no-cache=true --update \
     git \
     sudo \
     aria2 \
-    pylast \
     util-linux \
     libevent \
     jpeg-dev \
