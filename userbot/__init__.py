@@ -67,6 +67,9 @@ STRING_SESSION = os.environ.get("STRING_SESSION", None)
 # Logging channel/group ID configuration.
 BOTLOG_CHATID = int(os.environ.get("BOTLOG_CHATID", 0))
 
+#Botlog
+BOTLOG = sb(os.environ.get("BOTLOG", "False"))
+
 # Userbot logging feature switch.
 LOGSPAMMER = sb(os.environ.get("LOGSPAMMER", "False")) if BOTLOG_CHATID else False
 # Bleep Blop, this is a bot ;)
